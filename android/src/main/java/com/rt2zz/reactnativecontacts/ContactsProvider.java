@@ -254,24 +254,25 @@ public class ContactsProvider {
                 contact.department = cursor.getString(cursor.getColumnIndex(Organization.DEPARTMENT));
             } else if (mimeType.equals(StructuredPostal.CONTENT_ITEM_TYPE)) {
                 contact.postalAddresses.add(new Contact.PostalAddressItem(cursor));
-            } else if (mimeType.equals(Event.CONTENT_ITEM_TYPE)) {
-                int eventType = cursor.getInt(cursor.getColumnIndex(Event.TYPE));
-                if (eventType == Event.TYPE_BIRTHDAY) {
-                    String birthday = cursor.getString(cursor.getColumnIndex(Event.START_DATE)).replace("--", "");
-                    String[] yearMonthDay = birthday.split("-");
-                    List<String> yearMonthDayList = Arrays.asList(yearMonthDay);
-                    if (yearMonthDayList.size() == 2) {
-                        int month = Integer.parseInt(yearMonthDayList.get(0));
-                        int day = Integer.parseInt(yearMonthDayList.get(1));
-                        contact.birthday = new Contact.Birthday(new Date(0).getYear(), month, day);
-                    } else {
-                        int year = Integer.parseInt(yearMonthDayList.get(0));
-                        int month = Integer.parseInt(yearMonthDayList.get(1));
-                        int day = Integer.parseInt(yearMonthDayList.get(2));
-                        contact.birthday = new Contact.Birthday(year, month, day);
-                    }
-                }
             }
+            // } else if (mimeType.equals(Event.CONTENT_ITEM_TYPE)) {
+            //     int eventType = cursor.getInt(cursor.getColumnIndex(Event.TYPE));
+            //     if (eventType == Event.TYPE_BIRTHDAY) {
+            //         String birthday = cursor.getString(cursor.getColumnIndex(Event.START_DATE)).replace("--", "");
+            //         String[] yearMonthDay = birthday.split("-");
+            //         List<String> yearMonthDayList = Arrays.asList(yearMonthDay);
+            //         if (yearMonthDayList.size() == 2) {
+            //             int month = Integer.parseInt(yearMonthDayList.get(0));
+            //             int day = Integer.parseInt(yearMonthDayList.get(1));
+            //             contact.birthday = new Contact.Birthday(new Date(0).getYear(), month, day);
+            //         } else {
+            //             int year = Integer.parseInt(yearMonthDayList.get(0));
+            //             int month = Integer.parseInt(yearMonthDayList.get(1));
+            //             int day = Integer.parseInt(yearMonthDayList.get(2));
+            //             contact.birthday = new Contact.Birthday(year, month, day);
+            //         }
+            //     }
+            // }
         }
 
         return map;
